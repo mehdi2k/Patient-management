@@ -2,6 +2,7 @@ package ma.mehdi.hoaspital;
 
 import ma.mehdi.hoaspital.entities.Patient;
 import ma.mehdi.hoaspital.repositories.PatientRepository;
+import ma.mehdi.hoaspital.sec.service.SecurityService;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -16,7 +17,7 @@ public class HoaspitalApplication {
         SpringApplication.run(HoaspitalApplication.class, args);
     }
 
-    @Bean
+    //@Bean
     CommandLineRunner commandLineRunner(PatientRepository patientRepository){
         return args -> {
             patientRepository.save(new Patient(null,"ramadan",new Date(),false,500));
@@ -34,7 +35,18 @@ public class HoaspitalApplication {
         };
 
 
+
     }
 
+    @Bean
+    CommandLineRunner saveUsers(SecurityService securityService){
+        return args -> {
+            securityService.saveNewUser("mohamed","1234","1234");
+            securityService.saveNewUser("mohamed","1234","1234");
+            securityService.saveNewUser("mohamed","1234","1234");
+
+
+        };
+    }
 
 }
