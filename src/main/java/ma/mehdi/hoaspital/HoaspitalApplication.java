@@ -7,6 +7,8 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 import java.util.Date;
 
@@ -15,6 +17,11 @@ public class HoaspitalApplication {
 
     public static void main(String[] args) {
         SpringApplication.run(HoaspitalApplication.class, args);
+    }
+
+    @Bean
+    PasswordEncoder passwordEncoder(){
+        return new BCryptPasswordEncoder();
     }
 
     //@Bean
@@ -38,13 +45,20 @@ public class HoaspitalApplication {
 
     }
 
-    @Bean
+    //@Bean
     CommandLineRunner saveUsers(SecurityService securityService){
         return args -> {
-            securityService.saveNewUser("mohamed","1234","1234");
-            securityService.saveNewUser("mohamed","1234","1234");
-            securityService.saveNewUser("mohamed","1234","1234");
+            securityService.saveNewUser("mehdi","1234","1234");
+            securityService.saveNewUser("mehdi2k","1234","1234");
+            securityService.saveNewUser("hassan","1234","1234");
 
+            securityService.saveNewRole("ADMIN","");
+            securityService.saveNewRole("USER","");
+
+            securityService.addRoleToUser("mehdi","ADMIN");
+            securityService.addRoleToUser("mehdi","USER");
+            securityService.addRoleToUser("mehdi2k","USER");
+            securityService.addRoleToUser("hassan","USER");
 
         };
     }

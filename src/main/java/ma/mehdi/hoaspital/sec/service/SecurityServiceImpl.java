@@ -28,7 +28,7 @@ public class SecurityServiceImpl implements SecurityService {
         AppUser appUser=new AppUser();
         appUser.setUserId(UUID.randomUUID().toString());
         appUser.setUsername(username);
-        appUser.setPassword(password);
+        appUser.setPassword(hashedPWD);
         appUser.setActive(true);
         AppUser savedAppUser =appUserRepository.save(appUser);
 
@@ -36,7 +36,7 @@ public class SecurityServiceImpl implements SecurityService {
     }
 
     @Override
-    public AppRole SaveNewRole(String roleName, String description)
+    public AppRole saveNewRole(String roleName, String description)
     {
         AppRole appRole= appRoleRepository.findByRoleName(roleName);
         if(appRole!=null) throw new RuntimeException("Role "+roleName+ " aleready exist");
