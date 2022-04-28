@@ -57,8 +57,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http.authorizeRequests().antMatchers("/").permitAll();
 
         http.authorizeRequests().antMatchers("/webjars/**").permitAll();
-        http.authorizeRequests().antMatchers("/user/webjars/**").permitAll();
-        http.authorizeRequests().antMatchers("/admin/webjars/**").permitAll();
         http.authorizeRequests().antMatchers("/admin/**").hasAuthority("ADMIN");
         http.authorizeRequests().antMatchers("/user/**").hasAuthority("USER");
         http.authorizeRequests().anyRequest().authenticated();
